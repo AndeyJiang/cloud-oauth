@@ -31,4 +31,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         super.addResourceHandlers(registry);
     }
+
+    /**
+     * 省去了配置文件的繁多配置
+     */
 }
