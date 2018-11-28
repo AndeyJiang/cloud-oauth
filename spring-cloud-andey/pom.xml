@@ -27,6 +27,7 @@
 	<modules>
 		<module>spring-cloud-oauth</module>
 		<module>spring-cloud-config</module>
+		<module>common</module>
 	</modules>
 
 	<dependencies>

@@ -14,32 +14,32 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	    <dependencies>
+			<dependency>
+				<groupId>com.andey</groupId>
+				<artifactId>common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 			<!--security oauth2 -->
 		  <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-oauth2</artifactId>
 		</dependency>
 
-			<!-- 数据库连接池 -->
+			<!-- mybatis+mysql -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
-				<artifactId>druid-spring-boot-starter</artifactId>
-				<version>1.1.2</version>
+				<artifactId>druid</artifactId>
+				<version>1.0.26</version>
 			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-jdbc</artifactId>
-			</dependency>
-			<!-- Mysql 驱动 -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.43</version>
+				<scope>runtime</scope>
 			</dependency>
-			<!-- redis 驱动 -->
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-redis</artifactId>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>1.3.2</version>
 			</dependency>
 			<!--discovery、ribbon-->
 			<dependency>
@@ -70,5 +70,26 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-config-client</artifactId>
 			</dependency>
-	</dependencies>
+			<!--social-->
+			<dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-config</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-security</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-core</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-web</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+			</dependency>
+		</dependencies>
 </project>

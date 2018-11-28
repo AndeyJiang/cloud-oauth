@@ -1,0 +1,60 @@
+package com.andey.entity;
+
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.social.security.SocialUserDetails;
+
+import java.util.Collection;
+
+/**
+ * Created by jiangbin on 2018/11/27.
+ */
+@Data
+public class User implements SocialUserDetails {
+      private  String userId;
+      private  String userName;
+      private  String passWord;
+      private  String email;
+      private  String oauthRole;
+
+    @Override
+    public String getUserId() {
+        return userId;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return AuthorityUtils.commaSeparatedStringToAuthorityList(oauthRole);
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}
