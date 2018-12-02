@@ -1,5 +1,6 @@
 package com.andey.service.impl;
 
+import com.andey.config.exception.BadUserNameException;
 import com.andey.dao.UserMapper;
 import com.andey.entity.User;
 import com.andey.service.UserService;
@@ -19,18 +20,22 @@ public class UserServiceImpl  implements UserService{
     @Autowired
     private UserMapper userMapper;
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
-
-    @Override
-    public SocialUserDetails loadUserByUserId(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        User user=userMapper.findByName(userName);
+        if(user==null){
+            throw new BadUserNameException(0,"用户名错误");
+        }
+        return user;
     }
 
     @Override
     public User findByUserName(String userName) {
 
         return userMapper.findByName(userName);
+    }
+
+    @Override
+    public SocialUserDetails loadUserByUserId(String s) throws UsernameNotFoundException {
+        return null;
     }
 }
