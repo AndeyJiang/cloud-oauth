@@ -2,9 +2,8 @@
 spring-cloud-oauth2授权系统
 
 #数据库存储相关表结构
-授权认证记录表
 -- -----------------------------------------------------
--- Table `oauth_approvals`
+-- Table `oauth_approvals` 授权认证记录表
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_approvals` (
   `userId` VARCHAR(256) NULL DEFAULT NULL,
@@ -15,10 +14,8 @@ CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_approvals` (
   `lastModifiedAt` DATETIME NULL DEFAULT NULL)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-客户端信息表
 -- -----------------------------------------------------
--- Table `oauth_client_details`
+-- Table `oauth_client_details` 客户端信息表
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_client_details` (
   `client_id` VARCHAR(128) NOT NULL,
@@ -36,9 +33,8 @@ CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_client_details` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-授权码表
 -- -----------------------------------------------------
--- Table `iot_boss`.`oauth_code`
+-- Table `iot_boss`.`oauth_code` 授权码表
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_code` (
   `code` VARCHAR(256) NULL DEFAULT NULL,
@@ -46,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_code` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-refresh_token刷新令牌
+refresh_token
 -- -----------------------------------------------------
--- Table `iot_boss`.`oauth_refresh_token`
+-- Table `iot_boss`.`oauth_refresh_token` 刷新令牌
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_refresh_token` (
   `token_id` VARCHAR(256) NULL DEFAULT NULL,
