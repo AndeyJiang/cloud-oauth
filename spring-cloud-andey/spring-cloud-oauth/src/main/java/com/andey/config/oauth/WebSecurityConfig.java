@@ -1,15 +1,14 @@
 package com.andey.config.oauth;
 
 import com.andey.config.utils.Md5PasswordEncoder;
+import com.andey.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -20,8 +19,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
 
     //自动注入userDetailService
     @Autowired
-    @Qualifier("UserService")
-    private UserDetailsService userDetailsService;
+    private UserService userDetailsService;
 
     //自动注入加密方式
     @Bean
@@ -55,11 +53,11 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
          //先把basic校验关掉试试效果
          http.httpBasic().disable();
          // 配置登陆页/login并允许访问
-        http.requestMatchers()
-            .antMatchers("/oauth/**","/login/**")
-            .and()
-            .authorizeRequests()
-            .antMatchers("/oauth/**").authenticated();
+//        http.requestMatchers()
+//            .antMatchers("/oauth/**","/login/**")
+//            .and()
+//            .authorizeRequests()
+//            .antMatchers("/oauth/**").authenticated();
 
          http.formLogin().loginPage("/login").permitAll()
         .and().authorizeRequests().anyRequest().authenticated()
