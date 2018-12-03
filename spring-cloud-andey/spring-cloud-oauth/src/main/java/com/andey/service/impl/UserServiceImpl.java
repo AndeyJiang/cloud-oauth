@@ -4,6 +4,7 @@ import com.andey.config.exception.BadUserNameException;
 import com.andey.dao.UserMapper;
 import com.andey.entity.User;
 import com.andey.service.UserService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,7 +26,7 @@ public class UserServiceImpl  implements UserService{
         if(user==null){
             throw new BadUserNameException(0,"用户名错误");
         }
-        return user;
+        return  new org.springframework .security.core.userdetails.User(userName,user.getPassword(),user.getAuthorities());
     }
 
     @Override

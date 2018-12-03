@@ -30,12 +30,12 @@ public class User implements SocialUserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.passWord;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.userName;
     }
 
     @Override

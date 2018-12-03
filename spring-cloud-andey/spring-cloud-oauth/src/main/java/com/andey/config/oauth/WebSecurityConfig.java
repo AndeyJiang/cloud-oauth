@@ -35,7 +35,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
         provider.setUserDetailsService(userDetailsService);
         // 禁止隐藏用户未找到异常
         provider.setHideUserNotFoundExceptions(false);
-        // 使用BCrypt进行密码的hash
+        // 使用MD5进行密码的hash
         provider.setPasswordEncoder(myEncoder());
         return provider;
     }
@@ -52,13 +52,6 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
     public void configure(HttpSecurity http) throws Exception {
          //先把basic校验关掉试试效果
          http.httpBasic().disable();
-         // 配置登陆页/login并允许访问
-//        http.requestMatchers()
-//            .antMatchers("/oauth/**","/login/**")
-//            .and()
-//            .authorizeRequests()
-//            .antMatchers("/oauth/**").authenticated();
-
          http.formLogin().loginPage("/login").permitAll()
         .and().authorizeRequests().anyRequest().authenticated()
         //a不需要csrf，即允许跨域

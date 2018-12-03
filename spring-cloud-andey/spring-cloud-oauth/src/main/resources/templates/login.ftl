@@ -56,7 +56,7 @@
 <body>
 <div class="ui middle aligned center aligned grid">
     <div class="column transition hidden">
-        <form id="form" class="ui large form" action="login" method="post" style="border: 0">
+        <form id="form" class="ui large form" action="/login" method="post" style="border: 0">
             <div class="ui stacked segment">
                 <h3 class="title"> 授权中心 </h3>
                 <div class="field item">
