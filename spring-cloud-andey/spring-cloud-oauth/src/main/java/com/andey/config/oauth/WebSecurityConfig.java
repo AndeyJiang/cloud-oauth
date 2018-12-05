@@ -1,6 +1,6 @@
 package com.andey.config.oauth;
 
-import com.andey.config.handler.MyLoginAuthSuccessHandler;
+//import com.andey.config.handler.MyLoginAuthSuccessHandler;
 import com.andey.config.utils.Md5PasswordEncoder;
 import com.andey.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

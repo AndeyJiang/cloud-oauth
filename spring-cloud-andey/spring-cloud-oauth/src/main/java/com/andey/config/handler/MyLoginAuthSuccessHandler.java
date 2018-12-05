@@ -14,13 +14,13 @@ import java.io.IOException;
  * Created by fp295 on 2018/6/16.
  * 登陆成功处理，移动端登陆成功后还需做绑定操作
  */
-public class MyLoginAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        System.out.println("onAuthenticationSuccess");
-
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        System.out.print(userDetails.getUsername());
-        super.onAuthenticationSuccess(request, response, authentication);
-    }
-}
+//public class MyLoginAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+//    @Override
+//    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+//        System.out.println("onAuthenticationSuccess");
+//
+//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        System.out.print(userDetails.getUsername());
+//        super.onAuthenticationSuccess(request, response, authentication);
+//    }
+//}

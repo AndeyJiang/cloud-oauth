@@ -11,7 +11,7 @@ public class test1{
         Md5PasswordEncoder md5PasswordEncoder=new Md5PasswordEncoder();
         md5PasswordEncoder.encode("3333");
         System.out.print("你好");
-        System.out.print(md5PasswordEncoder.matches("3333","2be9bd7a3434f7038ca27d1918de58bd"));
+        System.out.print(md5PasswordEncoder.matches("mmyy12345","25491e587d30a04c6117e1e0c1125574"));
 
     }
 
