@@ -3,52 +3,60 @@ spring-cloud-oauth2授权系统
 
 #数据库存储相关表结构
 -- -----------------------------------------------------
+-- Table `oauth_access_token` 授权认证记录表
+-- -----------------------------------------------------
+CREATE TABLE `oauth_access_token` (
+  `token_id` varchar(256) DEFAULT NULL,
+  `token` blob,
+  `authentication_id` varchar(128) NOT NULL,
+  `user_name` varchar(256) DEFAULT NULL,
+  `client_id` varchar(256) DEFAULT NULL,
+  `authentication` blob,
+  `refresh_token` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`authentication_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+-- -----------------------------------------------------
 -- Table `oauth_approvals` 授权认证记录表
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_approvals` (
-  `userId` VARCHAR(256) NULL DEFAULT NULL,
-  `clientId` VARCHAR(256) NULL DEFAULT NULL,
-  `scope` VARCHAR(256) NULL DEFAULT NULL,
-  `status` VARCHAR(10) NULL DEFAULT NULL,
-  `expiresAt` DATETIME NULL DEFAULT NULL,
-  `lastModifiedAt` DATETIME NULL DEFAULT NULL)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE `oauth_approvals` (
+  `userId` varchar(256) COLLATE utf8_unicode_520_ci DEFAULT NULL,
+  `clientId` varchar(256) COLLATE utf8_unicode_520_ci DEFAULT NULL,
+  `scope` varchar(256) COLLATE utf8_unicode_520_ci DEFAULT NULL,
+  `status` varchar(10) COLLATE utf8_unicode_520_ci DEFAULT NULL,
+  `expiresAt` datetime DEFAULT NULL,
+  `lastModifiedAt` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci
 -- -----------------------------------------------------
 -- Table `oauth_client_details` 客户端信息表
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_client_details` (
-  `client_id` VARCHAR(128) NOT NULL,
-  `resource_ids` VARCHAR(256) NULL DEFAULT NULL,
-  `client_secret` VARCHAR(256) NULL DEFAULT NULL,
-  `scope` VARCHAR(256) NULL DEFAULT NULL,
-  `authorized_grant_types` VARCHAR(256) NULL DEFAULT NULL,
-  `web_server_redirect_uri` VARCHAR(256) NULL DEFAULT NULL,
-  `authorities` VARCHAR(256) NULL DEFAULT NULL,
-  `access_token_validity` INT(11) NULL DEFAULT NULL,
-  `refresh_token_validity` INT(11) NULL DEFAULT NULL,
-  `additional_information` VARCHAR(4096) NULL DEFAULT NULL,
-  `autoapprove` VARCHAR(256) NULL DEFAULT NULL,
-  PRIMARY KEY (`client_id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE `oauth_client_details` (
+  `client_id` varchar(128) NOT NULL,
+  `resource_ids` varchar(256) DEFAULT NULL,
+  `client_secret` varchar(256) DEFAULT NULL,
+  `scope` varchar(256) DEFAULT NULL,
+  `authorized_grant_types` varchar(256) DEFAULT NULL,
+  `web_server_redirect_uri` varchar(256) DEFAULT NULL,
+  `authorities` varchar(256) DEFAULT NULL,
+  `access_token_validity` int(11) DEFAULT NULL,
+  `refresh_token_validity` int(11) DEFAULT NULL,
+  `additional_information` varchar(4096) DEFAULT NULL,
+  `autoapprove` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 -- -----------------------------------------------------
--- Table `iot_boss`.`oauth_code` 授权码表
+-- Table `oauth_code` 授权码表
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_code` (
-  `code` VARCHAR(256) NULL DEFAULT NULL,
-  `authentication` BLOB NULL DEFAULT NULL)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE `oauth_code` (
+  `code` varchar(256) DEFAULT NULL,
+  `authentication` blob
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-refresh_token
 -- -----------------------------------------------------
--- Table `iot_boss`.`oauth_refresh_token` 刷新令牌
+-- Table `oauth_refresh_token` 刷新令牌
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `iot_boss`.`oauth_refresh_token` (
-  `token_id` VARCHAR(256) NULL DEFAULT NULL,
-  `token` BLOB NULL DEFAULT NULL,
-  `authentication` BLOB NULL DEFAULT NULL)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE `oauth_refresh_token` (
+  `token_id` varchar(256) DEFAULT NULL,
+  `token` blob,
+  `authentication` blob
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
