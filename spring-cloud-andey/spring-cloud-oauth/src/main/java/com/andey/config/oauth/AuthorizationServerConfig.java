@@ -40,9 +40,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    private AuthorizationEndpoint authorizationEndpoint;
-
     //客户端信息注入
     @Bean("jdbcClientDetailsService")
     public JdbcClientDetailsService getJdbcClientDetailsService() {
@@ -92,9 +89,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                  .allowFormAuthenticationForClients();
     }
 
-//    @PostConstruct
-//    public void init() {
-////        authorizationEndpoint.setUserApprovalPage("forward:/oauth/confirm_access");
-////        authorizationEndpoint.setErrorPage("forward:/oauth/confirm_access");
-//    }
 }

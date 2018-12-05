@@ -1,6 +1,4 @@
 package com.andey.config.oauth;
-
-//import com.andey.config.handler.MyLoginAuthSuccessHandler;
 import com.andey.config.utils.Md5PasswordEncoder;
 import com.andey.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 /**
  * Created by jiangbin on 2018/11/26.
@@ -63,9 +60,6 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
                   .and()
                   .formLogin()
                   .loginPage("/login")
-//                   .defaultSuccessUrl("/oauth/confirm_access")
-//                 .successHandler(new MyLoginAuthSuccessHandler())
-//                 .failureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"))
                   .permitAll()
 
         //a不需要csrf，即允许跨域
