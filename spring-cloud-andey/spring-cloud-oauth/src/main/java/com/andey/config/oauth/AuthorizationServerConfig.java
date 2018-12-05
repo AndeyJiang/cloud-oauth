@@ -1,5 +1,7 @@
 package com.andey.config.oauth;
 
+import com.andey.config.jwt.CustomerAccessTokenConverter;
+import com.andey.config.utils.KeyStroeUtils;
 import com.andey.config.utils.Md5PasswordEncoder;
 import com.andey.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,10 @@ import org.springframework.security.oauth2.provider.client.JdbcClientDetailsServ
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -46,9 +51,23 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return new JdbcClientDetailsService(dataSource);
     }
 
+    //数据库存储token
     @Bean("jdbcTokenStore")
     public JdbcTokenStore getJdbcTokenStore() {
         return new JdbcTokenStore(dataSource);
+    }
+
+    //JWT生成token
+    @Bean
+    public TokenStore jwtTokenStore() {
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter jwtAccessTokenConverter = new CustomerAccessTokenConverter();
+        jwtAccessTokenConverter.setKeyPair(KeyStroeUtils.getPairKey());
+        return jwtAccessTokenConverter;
     }
 
     @Bean
@@ -75,7 +94,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .userDetailsService(userDetailsService)
                 .authorizationCodeServices(jdbcAuthorizationCodeServices())
                 .approvalStore(approvalStore())
-                .tokenStore(getJdbcTokenStore());
+                //JDBC
+//                .tokenStore(getJdbcTokenStore())
+                //JWT
+                .accessTokenConverter(jwtAccessTokenConverter());
     }
 
     @Override
@@ -84,7 +106,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // 开启/oauth/token_key验证端口无权限访问
                 .tokenKeyAccess("permitAll()")
                 // 开启/oauth/check_token验证端口认证权限访问
-                .checkTokenAccess("isAuthenticated()")
+                .checkTokenAccess("permitAll()")
                 //允许表单提交获取token
                  .allowFormAuthenticationForClients();
     }
