@@ -7,19 +7,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 /**
  * Created by jiangbin on 2018/11/29.
  */
 @Configuration
+@EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -30,6 +34,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private AuthorizationEndpoint authorizationEndpoint;
 
     //客户端信息注入
     @Bean("jdbcClientDetailsService")
@@ -69,5 +76,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenKeyAccess("permitAll()")
                 // 开启/oauth/check_token验证端口认证权限访问
                 .checkTokenAccess("isAuthenticated()");
+    }
+
+    @PostConstruct
+    public void init() {
+//        authorizationEndpoint.setUserApprovalPage("forward:/oauth/confirm_access");
+//        authorizationEndpoint.setErrorPage("forward:/oauth/confirm_access");
     }
 }

@@ -7,7 +7,7 @@
 </head>
 <style type="text/css">
     body {
-        /*background-color: #364150;*/
+        background-color: #364150;
         background-image: url("static/img/background.jpg");
         background-repeat: no-repeat;
         background-size: 100% 100%;
@@ -49,6 +49,7 @@
         color: #32c5d2
     }
     .login{
+
         margin-bottom: 20px;
         background-color: #47b77d
     }
