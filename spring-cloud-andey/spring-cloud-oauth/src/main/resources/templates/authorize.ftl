@@ -35,7 +35,8 @@
 <form id="form" action="${request.contextPath}/oauth/authorize" method='post'>
     <input id="approval" name='user_oauth_approval' value='false' type='hidden'/>
     <input id="approveOrDeny" name='authorize' value='Authorize' type='hidden'/>
-    <input id="scope" name='scope.user' value='true' type='hidden'/>
+    <input id="scope" name='scope.read' value='true' type='hidden'/>
+    <input id="scope1" name='scope.write' value='true' type='hidden'/>
 </form>
 <div class="ui modal" id="modal">
     <div class="header title">授权中心
@@ -44,6 +45,7 @@
     <div class="content">
         <p style="line-height: 2.5">
             将允许应用 ${authorizationRequest.clientId} 拥有以下权限：<br>
+            <i class="user icon"></i>获取你单位信息
             <i class="user icon"></i>获取你的用户信息
         </p>
     </div>
@@ -60,6 +62,8 @@
     $("#ok").click(function () {
         $("#approval").val("true");
         $("#approveOrDeny").attr("name", "authorize").val("Authorize");
+        $("#scope").val(true);
+        $("#scope1").val(true);
         $("#form").submit();
     })
 

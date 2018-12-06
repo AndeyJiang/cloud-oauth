@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,17 +28,25 @@ public class MvcController {
 
     /**
      * 授权页面
-     *
+     *scope(资源范围) 规则，oauth系统会判断：
+     * 1：如果请求中含有scope，则将请求中的scope放入Principal中
+     * 2：如果请求中没有scope信息，授权页面显示对应Client_id的默认scope信息
      * @param model
      */
     @RequestMapping("/oauth/confirm_access")
-    public ModelAndView authorizePage(Map<String, Object> model) {
+    public ModelAndView authorizePage(Map<String, Object> model, HttpServletRequest request) {
         // 获取用户名
-        String userName = ((UserDetails) SecurityContextHolder.getContext()
+         String userName = ((UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal())
                 .getUsername();
         model.put("userName", userName);
+        Map<String, String> scopes = (Map<String, String>) (model.containsKey("scopes") ? model.get("scopes") : request.getAttribute("scopes"));
+        List<String> scopeList = new ArrayList<String>();
+        for (String scope : scopes.keySet()) {
+            scopeList.add(scope);
+        }
+        model.put("scopeList", scopeList);
         return new ModelAndView("authorize", model);
     }
 
