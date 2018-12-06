@@ -5,7 +5,7 @@ spring-cloud-oauth2授权系统
 采用MD5密码编码；
 采用JWt对称加密的Token形式，因JWT自包含信息特性、省略了token数据库存储方式；实现JWTtoken封装自定义信息
 -- -----------------------------------------------------
-#数据库存储相关表结构
+#(一)数据库存储相关表结构
 -- -----------------------------------------------------
 -- Table `oauth_access_token` 授权认证记录表
 -- -----------------------------------------------------
@@ -64,3 +64,38 @@ CREATE TABLE `oauth_refresh_token` (
   `token` blob,
   `authentication` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+-- -----------------------------------------------------
+#（二） 用Java 自带的keytool创建证书库(keyStroe)，生成公钥和私钥
+-- -----------------------------------------------------
+keytool -genkeypair \
+        -alias www.mydomain.com \
+        -keyalg RSA \
+        –keysize 4096 \
+        -keypass mypassword \
+        -sigalg SHA256withRSA \
+        -dname "cn=www.mydomain.com,ou=xxx,o=xxx,l=Beijing,st=Beijing,c=CN" \ 
+        -validity 3650 \
+        -keystore www.mydomain.com_keystore.jks \
+        -storetype JKS \
+        -storepass mypassword
+-- -----------------------------------------------------
+#（三） 自动授权或者手动授权（页面默认授权scope.read和scope.write）
+-- -----------------------------------------------------
+client_details表中字段 approve  = true    为自动授权，跳过授权页面
+client_details表中字段 approve  =false    为手动授权，进入授权页，经用户确认
+-- -----------------------------------------------------
+#（四）访问地址
+-- -----------------------------------------------------
+1、访问登录也地址
+localhost:8081/oauth/authorize?response_type=code&client_id=ANDEY&redirect_uri=https://www.baidu.com
+-----------------------------------------------------
+2、获取授权码地址
+localhost:8081/oauth/token
+-----------------------------------------------------
+3、获取JWTToken的公钥地址
+localhost:8081/oauth/token_key
+-----------------------------------------------------
+4、校验JWTToken信息地址
+localhost:8081/oauth/check_token
+
+
