@@ -93,7 +93,8 @@ client_details表中字段 approve  =false    为手动授权，进入授权页�
 -- -----------------------------------------------------
 #（五）重点理解：  
 认证是由AuthenticationManager来管理，但是真正进行认证的是AuthenticationManager中定义的AuthenticationProvider。AuthenticationManager中可以定义有多个AuthenticationProvider.  
-当我们使用authentication-provider元素来定义一个AuthenticationProvider时，如果没有指定对应关联的AuthenticationProvider对象，Spring Security默认会使用DaoAuthentiationProvider。DaoAuthenticationProvider再进行认证的时候需要一个UserDetailService来获取用户的信息UserDetails,其中包括用户名、密码和所拥有的权限等.  
+当我们使用authentication-provider元素来定义一个AuthenticationProvider时，如果没有指定对应关联的AuthenticationProvider对象，Spring Security默认会使用DaoAuthentiationProvider.  
+DaoAuthenticationProvider再进行认证的时候需要一个UserDetailService来获取用户的信息UserDetails,其中包括用户名、密码和所拥有的权限等.  
 所以如果我们需要改变认证的方式，我们可以实现自己的AuthenticationProvider.如果需要改变认证的用户的信息来源，我们可以实现UserDetailsService.
 -- -----------------------------------------------------
 
