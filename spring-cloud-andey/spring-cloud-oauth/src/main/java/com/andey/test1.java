@@ -10,8 +10,8 @@ public class test1{
     public  static  void  main(String[] args){
         Md5PasswordEncoder md5PasswordEncoder=new Md5PasswordEncoder();
         md5PasswordEncoder.encode("3333");
-        System.out.print("你好");
-        System.out.print(md5PasswordEncoder.matches("mmyy12345","25491e587d30a04c6117e1e0c1125574"));
+        System.out.println( md5PasswordEncoder.encode("mmyy12345"));
+        System.out.println(md5PasswordEncoder.matches("mmyy12345","a141c47927929bc2d1fb6d336a256df4"));
 
     }
 

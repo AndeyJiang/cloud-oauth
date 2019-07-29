@@ -79,7 +79,7 @@
             <div class="ui error message"></div>
         </form>
 
-        <form id="form1" class="ui large form transition hidden" action="phoneLogin" method="post" style="border: 0;">
+        <form id="form1" class="ui large form transition hidden" action="/authentication/phoneLogin" method="post" style="border: 0;">
             <div class="ui stacked segment">
                 <h3 class="title"> 授权中心 </h3>
                 <div class="field item">

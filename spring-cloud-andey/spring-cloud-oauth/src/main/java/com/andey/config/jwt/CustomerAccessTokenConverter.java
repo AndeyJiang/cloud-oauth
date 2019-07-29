@@ -24,7 +24,7 @@ public class CustomerAccessTokenConverter extends JwtAccessTokenConverter {
 				Map<String, Object> userMap = Maps.newHashMap();
 				userMap.put("username", user.getUsername());
 				userMap.put("authorities", user.getAuthorities());
-				userMap.put("email", user.getEmail());
+				//userMap.put("email", user.getEmail());
 				defaultOAuth2AccessToken.getAdditionalInformation().put(TOKEN_USE_KEY, userMap);
 
 		}

@@ -71,6 +71,7 @@
         $("#approval").val("false");
         $("#approveOrDeny").attr("name", "deny").val("Deny");
         $("#scope").val("false");
+        $("#scope1").val("false")
         $("#form").submit();
     })
     function changeUser() {

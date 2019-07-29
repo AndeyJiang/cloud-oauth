@@ -16,7 +16,7 @@ public class User implements SocialUserDetails {
       private  String userName;
       private  String passWord;
       private  String email;
-      private  String oauthRole;
+      private  String authRole;
 
     @Override
     public String getUserId() {
@@ -25,7 +25,7 @@ public class User implements SocialUserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.commaSeparatedStringToAuthorityList(oauthRole);
+        return AuthorityUtils.commaSeparatedStringToAuthorityList(authRole);
     }
 
     @Override
