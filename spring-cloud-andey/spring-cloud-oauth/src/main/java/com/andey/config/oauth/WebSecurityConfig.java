@@ -29,11 +29,9 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
     @Autowired
     SmsCodeAuthenticationProvider smsCodeAuthenticationProvider;
 
-    //自动注入userDetailService
     @Autowired
     private UserService userDetailsService;
 
-    //自动注入加密方式
     @Bean
     public PasswordEncoder myEncoder(){
         return new Md5PasswordEncoder();

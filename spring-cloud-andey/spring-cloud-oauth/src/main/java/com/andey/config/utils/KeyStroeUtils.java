@@ -23,11 +23,11 @@ public class KeyStroeUtils {
         return keyStoreKeyFactory.getKeyPair(ALIAS);
     }
 
-    //获取公钥
+    //to obtain the public key
     public static PublicKey getPublicKey() {
         return getPairKey().getPublic();
     }
 
-    //获取私钥
+    //to obtain the private key
     public  static PrivateKey getPrivateKey(){return getPairKey().getPrivate(); }
 }

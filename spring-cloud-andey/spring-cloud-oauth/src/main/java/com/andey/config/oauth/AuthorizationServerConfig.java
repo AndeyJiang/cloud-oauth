@@ -40,20 +40,20 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private DataSource dataSource;
 
-    //客户端信息注入
+
     @Bean("jdbcClientDetailsService")
     public JdbcClientDetailsService getJdbcClientDetailsService() {
         return new JdbcClientDetailsService(dataSource);
     }
 
-    //数据库存储token
+
     @Bean("jdbcTokenStore")
     @Primary
     public JdbcTokenStore getJdbcTokenStore() {
         return new JdbcTokenStore(dataSource);
     }
 
-    //JWT生成token
+
     @Bean
     public TokenStore jwtTokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
@@ -79,7 +79,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // 使用JdbcClientDetailsService客户端详情服务
+
         clients.withClientDetails(getJdbcClientDetailsService());
     }
 
@@ -99,11 +99,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
         oauthServer
-                // 开启/oauth/token_key验证端口权限访问
+                // start->/oauth/token_key    verify token access
                 .tokenKeyAccess("permitAll()")
-                // 开启/oauth/check_token验证端口认证权限访问
+                // start->/oauth/check_token  verify token authentication  access permit
                 .checkTokenAccess("permitAll()")
-                //允许表单提交获取token
+                //permit form submit to obtain token
                  .allowFormAuthenticationForClients();
     }
 
